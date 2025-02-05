@@ -89,12 +89,12 @@ section {
   cursor: pointer;
   transition: opacity var(--animation-duration) ease;
 }
-.color-option:disabled {
+/* .color-option:disabled {
   opacity: 0.3;
   animation: vibrate 0.3s ease;
   cursor: not-allowed;
   background-color: var(--color-disabled);
-}
+} */
 @keyframes vibrate {
   0%,
   100% {

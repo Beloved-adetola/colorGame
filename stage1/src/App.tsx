@@ -52,13 +52,8 @@ function App() {
     const colors = getRandomColors();
     setTargetColor(colors[Math.floor(Math.random() * colors.length)]);
     setColorOption(colors);
-    setIsClicked(false);
-    setIsWrong(false);
     setTarget(true);
     setFade(true);
-    setStatusCorrect(false);
-    setIsCorrect(false);
-    setStatusWrong(false);
   };
 
   const handleGuess = (color: string) => {
@@ -70,6 +65,7 @@ function App() {
       setStatusCorrect(true);
       setIsCorrect(true);
       setStatusWrong(false);
+      continueGame();
     } else {
       setIsClicked(true);
       setTarget(false);
@@ -79,6 +75,14 @@ function App() {
       setStatusWrong(true);
       setGameOver(true);
     }
+
+    setTimeout(() => {
+      setIsCorrect(false);
+      setIsWrong(false);
+      setIsClicked(false);
+      setStatusCorrect(false);
+      setStatusWrong(false);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -105,7 +109,11 @@ function App() {
           <p
             data-testid="gameStatus"
             className={`game-status ${
-              statusCorrect ? "status-correct" : statusWrong ?"status-wrong" : ""
+              statusCorrect
+                ? "status-correct"
+                : statusWrong
+                ? "status-wrong"
+                : ""
             }`}
             id="status"
           >
@@ -132,19 +140,20 @@ function App() {
               data-testid="colorOption"
               aria-label={`select color ${color}`}
               key={color}
-              disabled={isClicked === true}
+              // disabled={isClicked === true}
               className="color-option"
               style={{ backgroundColor: color }}
               onClick={() => handleGuess(color)}
             ></button>
           ))}
         </div>
-        <button
+        {/* <button
+          type="button"
           disabled={gameOver === true || isClicked === false}
           onClick={continueGame}
         >
           Next Round
-        </button>
+        </button> */}
       </div>
 
       {gameOver && (
@@ -157,6 +166,7 @@ function App() {
           <h2>You Lose, Try again</h2>
           <p>Your Score: {score}</p>
           <button
+            type="submit"
             data-testid="newGameButton"
             onClick={newGame}
             className="restart-game-button"
@@ -170,9 +180,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <i class='bx bx-check-circle' ></i> */
-}
-//<i class='bx bxs-badge-check' ></i>
-//<i class='bx bxs-message-square-x'></i>
