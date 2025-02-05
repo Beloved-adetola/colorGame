@@ -73,12 +73,18 @@ section {
     transform: translateY(0);
   }
 }
+.instructions{
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  border-radius: 30px;
+}
 .options {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 15px;
-  margin: 20px 0;
+  margin: 15px 0;
   will-change: opacity, transform;
 }
 .color-option {
@@ -89,12 +95,6 @@ section {
   cursor: pointer;
   transition: opacity var(--animation-duration) ease;
 }
-/* .color-option:disabled {
-  opacity: 0.3;
-  animation: vibrate 0.3s ease;
-  cursor: not-allowed;
-  background-color: var(--color-disabled);
-} */
 @keyframes vibrate {
   0%,
   100% {
@@ -164,7 +164,7 @@ section {
   font-size: 2rem;
   color: #333;
 }
-
+/* Responsive Design for Smaller Screens */
 @media (min-width: 320px) {
   .target-color {
     width: 100%;
@@ -172,7 +172,7 @@ section {
   }
 
   .color-option {
-    width: 120px; /* Smaller buttons for small screens */
+    width: 120px;
     height: 60px;
   }
 
@@ -183,7 +183,7 @@ section {
 
   .gameInfo .score,
   .gameInfo {
-    font-size: 1rem; /* Smaller font size for small screens */
+    font-size: 1rem;
   }
 
   .resultBox {
@@ -193,11 +193,11 @@ section {
   }
 
   .resultBox h2 {
-    font-size: 1.5rem; /* Smaller heading for small screens */
+    font-size: 1.5rem;
   }
 
   .resultBox button {
-    font-size: 0.9rem; /* Smaller button text for small screens */
+    font-size: 0.9rem;
   }
 }
 

@@ -60,29 +60,27 @@ function App() {
     if (color === targetColor) {
       setScore((prevScore) => prevScore + 1);
       setIsClicked(true);
-      setTarget(false);
-      setFade(false);
       setStatusCorrect(true);
       setIsCorrect(true);
       setStatusWrong(false);
       continueGame();
     } else {
       setIsClicked(true);
-      setTarget(false);
       setIsWrong(true);
-      setFade(false);
       setStatusCorrect(false);
       setStatusWrong(true);
       setGameOver(true);
     }
 
     setTimeout(() => {
+      setTarget(false);
       setIsCorrect(false);
       setIsWrong(false);
       setIsClicked(false);
       setStatusCorrect(false);
       setStatusWrong(false);
-    }, 1000);
+      setFade(false);
+    }, 1500);
   };
 
   useEffect(() => {
@@ -132,7 +130,11 @@ function App() {
             )}
           </p>
         </div>
-        <p data-testid="gameInstructions">Guess the Color?</p>
+        <p className="instructions" data-testid="gameInstructions">
+          Match the color in the box above! <br />
+          Click on the button that matches the target color. <br />
+          Keep your streak going to score higher!
+        </p>
         <div className={`options ${fade ? "fade" : ""}`}>
           {colorOption.map((color) => (
             <button
@@ -140,20 +142,12 @@ function App() {
               data-testid="colorOption"
               aria-label={`select color ${color}`}
               key={color}
-              // disabled={isClicked === true}
               className="color-option"
               style={{ backgroundColor: color }}
               onClick={() => handleGuess(color)}
             ></button>
           ))}
         </div>
-        {/* <button
-          type="button"
-          disabled={gameOver === true || isClicked === false}
-          onClick={continueGame}
-        >
-          Next Round
-        </button> */}
       </div>
 
       {gameOver && (
