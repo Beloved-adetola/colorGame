@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 25px;
+  background-color: rgba(255, 228, 196, 0.062);
+  box-shadow: 0 0 10px rgba(128, 0, 0, 0.534);
+  z-index: 100;
+  border-radius: 20px;
+}
+.gameArea {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+.target-color {
+  width: 100%;
+  max-width: 400px;
+  height: 100px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+}
+.next-target {
+  transform: rotateX(180deg);
+  transition: all 2s;
+}
+.gameInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.gameInfo .score {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.status-wrong {
+  color: red;
+}
+.status-correct {
+  color: green;
+}
+.status-correct,
+.status-wrong {
+  animation: status-drop 1s ease;
+}
+@keyframes status-drop {
+  0% {
+    transform: translateY(-200%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.options {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px 0;
+  will-change: opacity, transform;
+}
+.color-option {
+  width: 200px;
+  height: 100px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: opacity var(--animation-duration) ease;
+}
+.color-option:disabled {
+  opacity: 0.3;
+  animation: vibrate 0.3s ease;
+  cursor: not-allowed;
+}
+@keyframes vibrate {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25%,
+  75% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+.correct {
+  animation: flash-green 2s ease;
+}
+.wrong {
+  animation: flash-red 2s ease;
+}
+@keyframes flash-green {
+  from {
+    background-color: rgba(0, 128, 0, 0.534);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@keyframes flash-red {
+  from {
+    background-color: rgba(128, 0, 0, 0.534);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+.fade {
+  animation: fade-in 1.5s ease-out forwards;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-300%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-200%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.resultBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 30px;
+  animation: status-drop 3s ease-in-out;
+  background-color: rgba(0, 255, 255, 0.336);
+  width: 50%;
+  height: 70%;
+  position: fixed;
+  backdrop-filter: blur(10px);
+}
+.resultBox h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+@media (min-width: 320px) {
+  .target-color {
+    width: 100%;
+    height: 80px;
+  }
+
+  .color-option {
+    width: 120px; /* Smaller buttons for small screens */
+    height: 60px;
+  }
+
+  .gameInfo {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gameInfo .score,
+  .gameInfo {
+    font-size: 1rem; /* Smaller font size for small screens */
+  }
+
+  .resultBox {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .resultBox h2 {
+    font-size: 1.5rem; /* Smaller heading for small screens */
+  }
+
+  .resultBox button {
+    font-size: 0.9rem; /* Smaller button text for small screens */
+  }
+}
+
+/* Responsive Design for Larger Screens */
+@media (min-width: 600px) {
+  .target-color {
+    width: 100%;
+    max-width: 400px;
+    height: 100px;
+  }
+
+  .color-option {
+    width: 200px;
+    height: 100px;
+  }
+
+  .gameInfo {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .gameInfo .score,
+  .gameInfo .game-status {
+    font-size: 1.2rem;
+  }
+
+  .resultBox {
+    width: 90%;
+    max-width: 500px;
+    height: 70%;
+    border-radius: 30px;
+  }
+
+  .resultBox h2 {
+    font-size: 2rem;
+  }
+
+  .resultBox button {
+    font-size: 1rem;
+  }
+}
