@@ -86,6 +86,7 @@ function App() {
       className={isCorrect ? "correct" : isWrong ? "wrong" : ""}
     >
       <div className="gameArea">
+        <h1>Color Guessing Game</h1>
         <div
           data-testid="colorBox"
           className={`target-color ${target ? "next-target" : ""}`}
