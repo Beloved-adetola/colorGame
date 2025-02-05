@@ -5,13 +5,22 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
+:root {
+  --primary-bg: rgba(255, 228, 196, 0.062);
+  --primary-shadow: 0 0 10px rgba(128, 0, 0, 0.534);
+  --color-correct: rgba(0, 128, 0, 0.534);
+  --color-wrong: rgba(128, 0, 0, 0.534);
+  --color-disabled: rgba(0, 0, 0, 0.3);
+}
+
 section {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 25px;
-  background-color: rgba(255, 228, 196, 0.062);
-  box-shadow: 0 0 10px rgba(128, 0, 0, 0.534);
+  background-color: var(--primary-bg);
+  box-shadow: var(--primary-shadow);
   z-index: 100;
   border-radius: 20px;
 }
@@ -82,6 +91,7 @@ section {
   opacity: 0.3;
   animation: vibrate 0.3s ease;
   cursor: not-allowed;
+  background-color: var(--color-disabled);
 }
 @keyframes vibrate {
   0%,
@@ -104,7 +114,7 @@ section {
 }
 @keyframes flash-green {
   from {
-    background-color: rgba(0, 128, 0, 0.534);
+    background-color: var(--color-correct);
   }
   to {
     background-color: transparent;
@@ -112,7 +122,7 @@ section {
 }
 @keyframes flash-red {
   from {
-    background-color: rgba(128, 0, 0, 0.534);
+    background-color: var(--color-wrong);
   }
   to {
     background-color: transparent;
