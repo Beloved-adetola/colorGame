@@ -29,15 +29,10 @@ function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-
-  useEffect(() => {
-    newGame();
-  }, []);
-
-  const stat = document.getElementById("gameContainer");
-  const fade = document.getElementById("optionBox");
-  const target = document.getElementById("target");
-  const status = document.getElementById("status");
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [fade, setFade] = useState(false);
+  const [target, setTarget] = useState(false);
+  const [statusCorrect, setStatusCorrect] = useState(false);
 
   const newGame = () => {
     const colors = getRandomColors();
@@ -46,9 +41,9 @@ function App() {
     setIsClicked(false);
     setScore(0);
     setIsWrong(false);
-    stat?.classList.remove("correct", "wrong");
     setGameOver(false);
-    status?.classList.remove("status-wrong", "status-correct");
+    setStatusCorrect(false);
+    setIsCorrect(false);
   };
 
   const continueGame = () => {
@@ -56,47 +51,58 @@ function App() {
     setTargetColor(colors[Math.floor(Math.random() * colors.length)]);
     setColorOption(colors);
     setIsClicked(false);
-    stat?.classList.remove("correct");
-    stat?.classList.remove("wrong");
     setIsWrong(false);
-    target?.classList.add("next-target");
-    fade?.classList.add("fade");
-    status?.classList.remove("status-wrong", "status-correct");
+    setTarget(true);
+    setFade(true);
+    setStatusCorrect(false);
+    setIsCorrect(false);
   };
 
   const handleGuess = (color: string) => {
     if (color === targetColor) {
       setScore((prevScore) => prevScore + 1);
       setIsClicked(true);
-      stat?.classList.add("correct");
-      target?.classList.remove("next-target");
-      fade?.classList.remove("fade");
-      status?.classList.add("status-correct");
+      setTarget(false);
+      setFade(false);
+      setStatusCorrect(true);
+      setIsCorrect(true);
     } else {
       setIsClicked(true);
-      target?.classList.remove("next-target");
-      stat?.classList.add("wrong");
+      setTarget(false);
       setIsWrong(true);
-      fade?.classList.remove("fade");
-      status?.classList.add("status-wrong");
+      setFade(false);
+      setStatusCorrect(false);
       setGameOver(true);
     }
   };
 
+  useEffect(() => {
+    newGame();
+  }, []);
+
   return (
-    <section id="gameContainer">
+    <section
+      id="gameContainer"
+      className={isCorrect ? "correct" : isWrong ? "wrong" : ""}
+    >
       <div className="gameArea">
         <div
           data-testid="colorBox"
-          className="target-color"
+          className={`target-color ${target ? "next-target" : ""}`}
           id="target"
           style={{ backgroundColor: targetColor }}
         ></div>
         <div className="gameInfo">
-          <p data-testid="" className="score">
+          <p data-testid="score" className="score">
             Score: {score}
           </p>
-          <p data-testid="" className="game-status" id="status">
+          <p
+            data-testid="gameStatus"
+            className={`game-status ${
+              statusCorrect ? "status-correct" : "status-wrong"
+            }`}
+            id="status"
+          >
             {isClicked ? (
               isWrong ? (
                 <span>
@@ -113,11 +119,12 @@ function App() {
           </p>
         </div>
         <p data-testid="gameInstructions">Guess the Color?</p>
-        <div className="options">
+        <div className={`options ${fade ? "fade" : ""}`}>
           {colorOption.map((color) => (
             <button
               id="button"
-              data-testid=""
+              data-testid="colorOption"
+              aria-label={`select color ${color}`}
               key={color}
               disabled={isClicked === true}
               className="color-option"
@@ -144,7 +151,7 @@ function App() {
           <h2>You Lose, Try again</h2>
           <p>Your Score: {score}</p>
           <button
-            data-testid="restartGameButton"
+            data-testid="newGameButton"
             onClick={newGame}
             className="restart-game-button"
           >
