@@ -55,14 +55,17 @@ section {
 }
 .status-wrong {
   color: red;
+  animation: status-drop 1s ease;
+
 }
 .status-correct {
   color: green;
-}
-.status-correct,
-.status-wrong {
   animation: status-drop 1s ease;
+
 }
+/* .game-status span {
+  animation: status-drop 1s ease;
+} */
 @keyframes status-drop {
   0% {
     transform: translateY(-200%);

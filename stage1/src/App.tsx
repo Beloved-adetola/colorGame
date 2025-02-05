@@ -33,6 +33,7 @@ function App() {
   const [fade, setFade] = useState(false);
   const [target, setTarget] = useState(false);
   const [statusCorrect, setStatusCorrect] = useState(false);
+  const [statusWrong, setStatusWrong] = useState(false);
 
   const newGame = () => {
     const colors = getRandomColors();
@@ -44,6 +45,7 @@ function App() {
     setGameOver(false);
     setStatusCorrect(false);
     setIsCorrect(false);
+    setStatusWrong(false);
   };
 
   const continueGame = () => {
@@ -56,6 +58,7 @@ function App() {
     setFade(true);
     setStatusCorrect(false);
     setIsCorrect(false);
+    setStatusWrong(false);
   };
 
   const handleGuess = (color: string) => {
@@ -66,12 +69,14 @@ function App() {
       setFade(false);
       setStatusCorrect(true);
       setIsCorrect(true);
+      setStatusWrong(false);
     } else {
       setIsClicked(true);
       setTarget(false);
       setIsWrong(true);
       setFade(false);
       setStatusCorrect(false);
+      setStatusWrong(true);
       setGameOver(true);
     }
   };
@@ -100,7 +105,7 @@ function App() {
           <p
             data-testid="gameStatus"
             className={`game-status ${
-              statusCorrect ? "status-correct" : "status-wrong"
+              statusCorrect ? "status-correct" : statusWrong ?"status-wrong" : ""
             }`}
             id="status"
           >
