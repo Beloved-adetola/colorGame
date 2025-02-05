@@ -19,10 +19,10 @@ section {
   justify-content: space-around;
   align-items: center;
   margin: 20px;
-  background-color: var(--primary-bg);
   box-shadow: var(--primary-shadow);
   z-index: 100;
   border-radius: 20px;
+  background-color: var(--primary-bg);
 }
 .gameArea {
   display: flex;
@@ -73,7 +73,7 @@ section {
     transform: translateY(0);
   }
 }
-.instructions{
+.instructions {
   text-align: center;
   border: 1px solid #ccc;
   padding: 0 10px;
